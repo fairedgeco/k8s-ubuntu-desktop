@@ -3,26 +3,28 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: ubuntu-desktop
-  name: ubuntu-desktop
-  namespace: desktop
+    app: ib-gateway
+  name: ib-gateway
+  namespace: ib
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ubuntu-desktop
+      app: ib-gateway
   template:
     metadata:
       labels:
-        app: ubuntu-desktop
+        app: ib-gateway
     spec:
       containers:
         #- image: jmcdice/k8s-ubuntu-desktop:latest
       - image: fredblgr/ubuntu-novnc:22.04
         imagePullPolicy: Always
-        name: ubuntu-desktop
+        name: ib-gateway
         ports:
         - containerPort: 6080
+          protocol: TCP
+        - containerPort: 4001
           protocol: TCP
         env:
         - name: VNC_PASSWORD

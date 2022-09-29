@@ -3,15 +3,20 @@
   kind: Service
   metadata:
     labels:
-      app: ubuntu-desktop
-    name: ubuntu-desktop
-    namespace: desktop
+      app: ib-gateway
+    name: ib-gateway
+    namespace: ib
   spec:
     ports:
     - port: 80
+      name: novnc
       protocol: TCP
       targetPort: 80
+    - port: 4001
+      name: ibapi
+      protocol: TCP
+      targetPort: 4001
     selector:
-      app: ubuntu-desktop
+      app: ib-gateway
     sessionAffinity: None
     type: ClusterIP
